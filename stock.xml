@@ -7,7 +7,7 @@
 	</meta>
 	<bindings>
 		<select itemPath="quotes.quote" produces="XML">
-			<urls><url>http://download.finance.yahoo.com/d/quotes.csv?timestamp={timestamp}&&s={-listjoin|,|symbol}</url></urls>
+			<urls><url>http://download.finance.yahoo.com/d/quotes.csv?timestamp={timestamp}&s={-listjoin|,|symbol}</url></urls>
 			<inputs>
 				<key id='f' type='xs:string' const='true' default='aa2bb2b3b4cc1c3c4c6c8dd1d2ee1e7e8e9ghjkg1g3g4g5g6ii5j1j3j4j5j6k1k2k4k5ll1l2l3mm2m3m4m5m6m7m8nn4opp1p2p5p6qrr1r2r5r6r7ss1s7t1t7t8vv1v7ww1w4xy' paramType='query' />
 				<key id='symbol' type='xs:string' batchable='true' maxBatchItems='20' paramType='path' required='true'/>
