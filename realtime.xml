@@ -12,9 +12,11 @@
       </urls>
       <inputs>
         <key id='symbol' type='xs:string' paramType='variable' required='true' />
+        <key id='rdn' type='xs:string' paramType='variable' required='false' />
       </inputs>
 <execute><![CDATA[
-    var url = "http://finance.yahoo.com/quote/" + symbol +"/profile";
+    var random = "_" + Math.random();
+    var url = "http://finance.yahoo.com/quote/" + symbol +"/profile?rnd="+random.substring(0,10);
     var realtimeQuery = y.query(
 	"select * from html where url=@url and " + 
 	"xpath='//*[@id=\"quote-header-info\"]/div[2]/div[1]/div' " +
