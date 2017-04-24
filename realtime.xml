@@ -12,9 +12,10 @@
       </urls>
       <inputs>
         <key id='symbol' type='xs:string' paramType='variable' required='true' />
+        <key id='timestamp' type='xs:string' paramType='variable' required='true' />
       </inputs>
 <execute><![CDATA[
-    var url = "http://finance.yahoo.com/quote/" + symbol +"/profile";
+    var url = "http://finance.yahoo.com/quote/" + symbol +"/profile?_t=" + timestamp;
     var realtimeQuery = y.query(
 	"select * from html where url=@url and " + 
 	"xpath='//*[@id=\"quote-header-info\"]/div[2]/div[1]/div' " +
