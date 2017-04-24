@@ -9,7 +9,6 @@
 		<select itemPath="quotes.quote" produces="XML">
 			<urls><url></url></urls>
 			<inputs>
-				<urls><url></url></urls>
 				<key id='symbol' type='xs:string' batchable='true' maxBatchItems='20' paramType='path' required='true'/>
 				<key id='timestamp' type='xs:string' paramType='path' required='true'/>
 			</inputs>
