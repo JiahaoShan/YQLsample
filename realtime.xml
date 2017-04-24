@@ -3,7 +3,7 @@
   <meta>
     <author>Shawn Shan</author>
     <description>Yahoo Finance Stock Real Time Quote</description>
-    <sampleQuery>select * from {table} where symbol="yhoo"</sampleQuery>
+    <sampleQuery>select * from {table} where symbol="yhoo" and timestamp="{timestamp}"</sampleQuery>
   </meta>
   <bindings>
     <select itemPath="" produces="XML">
