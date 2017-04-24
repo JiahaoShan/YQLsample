@@ -14,7 +14,6 @@
         <key id='symbol' type='xs:string' paramType='variable' required='true' />
       </inputs>
 <execute><![CDATA[
-    var random = "_" + Math.random();
     var url = "http://finance.yahoo.com/quote/" + symbol +"/profile";
     var realtimeQuery = y.query(
 	"select * from html where url=@url and " + 
