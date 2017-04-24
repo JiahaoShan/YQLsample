@@ -17,24 +17,6 @@
 				var results = y.query("select * from csv where url=@url and columns='Ask,AverageDailyVolume,Bid,AskRealtime,BidRealtime,BookValue,Change&PercentChange,Change,Commission,Currency,ChangeRealtime,AfterHoursChangeRealtime,DividendShare,LastTradeDate,TradeDate,EarningsShare,ErrorIndicationreturnedforsymbolchangedinvalid,EPSEstimateCurrentYear,EPSEstimateNextYear,EPSEstimateNextQuarter,DaysLow,DaysHigh,YearLow,YearHigh,HoldingsGainPercent,AnnualizedGain,HoldingsGain,HoldingsGainPercentRealtime,HoldingsGainRealtime,MoreInfo,OrderBookRealtime,MarketCapitalization,MarketCapRealtime,EBITDA,ChangeFromYearLow,PercentChangeFromYearLow,LastTradeRealtimeWithTime,ChangePercentRealtime,ChangeFromYearHigh,PercebtChangeFromYearHigh,LastTradeWithTime,LastTradePriceOnly,HighLimit,LowLimit,DaysRange,DaysRangeRealtime,FiftydayMovingAverage,TwoHundreddayMovingAverage,ChangeFromTwoHundreddayMovingAverage,PercentChangeFromTwoHundreddayMovingAverage,ChangeFromFiftydayMovingAverage,PercentChangeFromFiftydayMovingAverage,Name,Notes,Open,PreviousClose,PricePaid,ChangeinPercent,PriceSales,PriceBook,ExDividendDate,PERatio,DividendPayDate,PERatioRealtime,PEGRatio,PriceEPSEstimateCurrentYear,PriceEPSEstimateNextYear,Symbol,SharesOwned,ShortRatio,LastTradeTime,TickerTrend,OneyrTargetPrice,Volume,HoldingsValue,HoldingsValueRealtime,YearRange,DaysValueChange,DaysValueChangeRealtime,StockExchange,DividendYield'",{url:request.url});
 				var quotes = <quotes/>;
 				var rows=results.results.row;
-                var neededValues = {
-                    "Name" : true,
-                    "Symbol" : true,
-                    "LastTradePriceOnly": true,
-                    "Change" : true,
-                    "AverageDailyVolume" : true,
-                    "MarketCapitalization" : true,
-                    "PercentChange": true,
-                    "DaysLow" : true,
-                    "DaysHigh" : true,
-                    "YearLow" : true,
-                    "YearHigh" : true,
-                    "DaysRange" : true,
-                    "PercentChange" : true,
-                    "Volume" : true,
-                    "StockExchange" : true
-                };
-
 				for each (var row in rows) {
 					for each (var item in row.*) {
 						var elname = item.localName();
@@ -43,11 +25,10 @@
 							txt = txt.replace(/"/g, '');
 						}
 						row[elname]=txt;
-						if (!neededValues[elname]) {
-						    delete row[elname];
-						}
 					}
 					//split % change out
+					var txt = row["Change_PercentChange"].text().toString();
+					row["PercentChange"]=txt.substring(txt.indexOf(" - ")+2);	
 				    quotes.quote += <quote symbol={row.Symbol.text().toString()}>{row.*}</quote>;
 				}
 				response.object = quotes;
