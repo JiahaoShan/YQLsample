@@ -18,16 +18,22 @@
     var url = "http://finance.yahoo.com/quote/" + symbol +"/profile?_t=" + timestamp;
     var realtimeQuery = y.query(
 	"select * from html where url=@url and " + 
-	"xpath='//*[@id=\"quote-header-info\"]/div[2]/div[1]/div' " +
+	"xpath='//*[@id=\"quote-header-info\"]/div[2]/div[1]' " +
 	"limit 4",
 	{url:url});
     var quote = <quote symbol={symbol}></quote>;
     var results = realtimeQuery.results;
     var elements = results.*.length(); 
     if (elements != 0) {
-	quote.appendChild(<quote>{results.div.span[0].toString()}</quote>);
-	quote.appendChild(<change>{results.div.span[1].toString()}</change>);
-	quote.appendChild(<notice>{results.div.div.span.toString()}</notice>);
+	quote.appendChild(<quote>{results.div.div.span[0].toString()}</quote>);
+	quote.appendChild(<change>{results.div.div.span[1].toString()}</change>);
+	quote.appendChild(<notice>{results.div.div.div.span.toString()}</notice>);
+	if (results.div.p) {
+		quote.appendChild(<closequote>{results.div.p.span[0].toString().trim()}</quote>);
+		quote.appendChild(<closechange>{results.div.p.span[1].span.toString().trim()}</change>);
+		quote.appendChild(<closestatus>{results.div.p.span[2].toString().trim()}</notice>);	
+		quote.appendChild(<closenotice>{results.div.p.text().toString().trim()}</notice>);	
+	}
     }
     response.object = quote
 ]]></execute>
