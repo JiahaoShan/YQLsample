@@ -15,6 +15,7 @@
         <key id='timestamp' type='xs:string' paramType='variable' required='true' />
       </inputs>
 <execute><![CDATA[
+////*[@id="quote-header-info"]/div[2]
     var url = "http://finance.yahoo.com/quote/" + symbol +"/profile?_t=" + timestamp;
     var realtimeQuery = y.query(
 	"select * from html where url=@url and " + 
@@ -29,10 +30,14 @@
 	quote.appendChild(<change>{results.div.div.span[1].toString()}</change>);
 	quote.appendChild(<notice>{results.div.div.div.span.toString()}</notice>);
 	if (results.div.p) {
-		quote.appendChild(<closequote>{results.div.p.span[0].toString().trim()}</closequote>);
-		quote.appendChild(<closechange>{results.div.p.span[1].span.toString().trim()}</closechange>);
-		quote.appendChild(<closestatus>{results.div.p.span[2].toString().trim()}</closestatus>);	
-		quote.appendChild(<closenotice>{results.div.p.text().toString().trim()}</closenotice>);	
+		if (results.div.p.span[0])
+		  quote.appendChild(<closequote>{results.div.p.span[0].toString().trim()}</closequote>);
+		if (results.div.p.span[1].span)
+		  quote.appendChild(<closechange>{results.div.p.span[1].span.toString().trim()}</closechange>);
+		if (results.div.p.span[2])
+       		  quote.appendChild(<closestatus>{results.div.p.span[2].toString().trim()}</closestatus>);	
+		if (results.div.p && results.div.p.text())
+		  quote.appendChild(<closenotice>{results.div.p.text().toString().trim()}</closenotice>);	
 	}
     }
     response.object = quote
