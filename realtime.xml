@@ -15,11 +15,12 @@
         <key id='timestamp' type='xs:string' paramType='variable' required='true' />
       </inputs>
 <execute><![CDATA[
+    line number test
     var url = "http://finance.yahoo.com/quote/" + symbol +"/profile?_t=" + timestamp;
     var realtimeQuery = y.query(
 	"select * from html where url=@url and " + 
 	"xpath='//*[@id=\"quote-header-info\"]/div[2]/div[1]' " +
-	"limit 4",
+	"limit 5",
 	{url:url});
     var quote = <quote symbol={symbol}></quote>;
     var results = realtimeQuery.results;
