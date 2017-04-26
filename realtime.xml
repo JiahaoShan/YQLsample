@@ -28,11 +28,11 @@
 	quote.appendChild(<quote>{results.div.div.span[0].toString()}</quote>);
 	quote.appendChild(<change>{results.div.div.span[1].toString()}</change>);
 	quote.appendChild(<notice>{results.div.div.div.span.toString()}</notice>);
- 	if (results.div.p) {
-		//quote.appendChild(<closequote>{results.div.p.span[0].toString().trim()}</closequote>);
-		//quote.appendChild(<closechange>{results.div.p.span[1].span.toString().trim()}</closechange>);
-       		//quote.appendChild(<closestatus>{results.div.p.span[2].toString().trim()}</closestatus>);	
-		//quote.appendChild(<closenotice>{results.div.p.text().toString().trim()}</closenotice>);	
+ 	if (results.div.*.length() > 1) {
+		quote.appendChild(<closequote>{results.div.p.span[0].toString().trim()}</closequote>);
+		quote.appendChild(<closechange>{results.div.p.span[1].span.toString().trim()}</closechange>);
+       		quote.appendChild(<closestatus>{results.div.p.span[2].toString().trim()}</closestatus>);	
+		quote.appendChild(<closenotice>{results.div.p.text().toString().trim()}</closenotice>);	
 	}
     }
     response.object = quote
